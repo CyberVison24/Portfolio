@@ -23,7 +23,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 library(readr)
-USpop <- read_csv("STA 5900 /final individual project/USpop.csv")
+USpop <- read_csv("STA 5900/individual project/USpop.csv")
 View(USpop)
 
 # name of variables
@@ -46,8 +46,8 @@ legend("topright",
                          paste("SD:", round(sd(population), 2) ) )) 
 
 # summary statistics
-summary(population)
-sd(population)
+summary(population) 
+sd(population) #70.8903
 
 # Simple regression linear model (1); Population is dependent, Year is independent
   model1 <- lm(population ~ year_scaled, data = USpop)
@@ -69,14 +69,14 @@ sd(population)
   qqline(resid1)
   
   # shapiro test
-  shapiro.test(resid1)
+  shapiro.test(resid1) #p = 0.02443; reject normality
   
   # residual plot
   plot(resid1, xlab = "fitted values", ylab = "residuals", main = "Residual Plot for SLR Model")
   abline(h = 0)
   
   # bp test
-  bptest(model1)
+  bptest(model1) #p=0.7609; constant variance
   
   # AIC 
   AIC(model1)
@@ -116,14 +116,14 @@ sd(population)
   qqline(resid2)
   
   # shapiro test
-  shapiro.test(resid2)
+  shapiro.test(resid2) #p = 0.0412; reject normality
   
   # residual plot
   plot(resid2, xlab = "fitted values", ylab = "residuals", main = "Residual Plot for WWII Model")
   abline(h = 0)
   
   # bp test
-  bptest(model2)
+  bptest(model2) #p=0.3348; constant variance
   
   # AIC 
   AIC(model2)
@@ -158,14 +158,14 @@ sd(population)
   qqline(resid3)
   
   # shapiro test
-  shapiro.test(resid3)
+  shapiro.test(resid3) #p = 0.001765; reject normality
   
   # residual plot
   plot(resid3, xlab = "fitted values", ylab = "residuals", main = "Residual plot for Quadratic Model")
   abline(h = 0)
   
   # bp test
-  bptest(model3)
+  bptest(model3) #p = 0.1252; constant variance
   
   # AIC 
   AIC(model3)
@@ -201,27 +201,25 @@ sd(population)
   qqline(resid4)
   
   # shapiro test
-  shapiro.test(resid4)
+  shapiro.test(resid4) #p = 0.8094; DN reject normality
   
   # residual plot
   plot(resid4,xlab = "fitted values", ylab = "residuals", main = "Residual plot for Combined Model" )
   abline(h = 0)
   
   # bp test
-  bptest(model4)
+  bptest(model4) #p = 0.6155; constant variance
   
   # AIC 
   AIC(model4)
   
 # compare aic
-  AIC(model1)
-  AIC(model2)
-  AIC(model3)
-  AIC(model4)
+  AIC(model1) #181.4217
+  AIC(model2) #183.2614
+  AIC(model3) #103.285
+  AIC(model4) #65.965306
   
 # best model to predict population in 2020
 predict(model4, newdata = data.frame(year_scaled = 230, WWII = 0))  # 2020 is not WWII era
+# 333.084
   
-  
-
-
